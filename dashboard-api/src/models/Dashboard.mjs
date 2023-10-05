@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.mjs';
 
-const Dashboard = sequelize.define('Dashboard', {
+const Dashboard = sequelize.define('dashboard', {
   name: {
     type: DataTypes.STRING(25),
     allowNull: false,

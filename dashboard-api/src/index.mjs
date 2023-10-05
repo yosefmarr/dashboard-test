@@ -9,6 +9,8 @@ import error from './middlewares/error.mjs';
 
 import './models/_index.mjs';
 
+import login from './routes/login.mjs';
+
 const { port } = Config.server;
 
 const app = express();
@@ -16,6 +18,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(health);
+
+app.use(login);
 
 app.use(error);
 

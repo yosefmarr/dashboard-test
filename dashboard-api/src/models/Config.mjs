@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.mjs';
 
-const Config = sequelize.define('Config', {
+const Config = sequelize.define('config', {
   language: {
     type: DataTypes.ENUM,
     values: ['es', 'en'],

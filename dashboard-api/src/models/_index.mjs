@@ -23,7 +23,7 @@ User.belongsTo(Dashboard, {
     allowNull: false,
   },
 });
-Permission.belongsToMany(Role, { through: 'RolePermissions' });
+Permission.belongsToMany(Role, { through: 'rolepermissions' });
 Device.belongsToMany(User, { through: UserDevices });
 UserDevices.belongsTo(DeviceType, {
   foreignKey: {

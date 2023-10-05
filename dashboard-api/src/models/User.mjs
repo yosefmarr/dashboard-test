@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.mjs';
 
-const User = sequelize.define('User', {
+const User = sequelize.define('user', {
   firstName: {
     type: DataTypes.STRING(25),
     allowNull: false,

@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.mjs';
 
-const Device = sequelize.define('Device', {
+const Device = sequelize.define('device', {
   id: {
     type: DataTypes.STRING,
     allowNull: false,

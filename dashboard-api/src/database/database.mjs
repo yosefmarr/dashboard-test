@@ -25,6 +25,7 @@ export const DBconnect = () => {
   return new Promise(async (resolve, reject) => {
     try {
       await SequelizeInstance.authenticate();
+      await SequelizeInstance.sync();
       resolve();
     } catch (error) {
       reject(error);

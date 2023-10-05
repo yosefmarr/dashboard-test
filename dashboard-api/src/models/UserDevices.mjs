@@ -3,7 +3,7 @@ import sequelize from '../database/database.mjs';
 import User from './User.mjs';
 import Device from './Device.mjs';
 
-const UserDevices = sequelize.define('UserDevices', {
+const UserDevices = sequelize.define('userdevices', {
   UserId: {
     type: DataTypes.INTEGER,
     references: {
