@@ -7,7 +7,7 @@ const Dashboard = sequelize.define('Dashboard', {
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING(150),
+    type: DataTypes.STRING(500),
     allowNull: false,
   },
   count: {

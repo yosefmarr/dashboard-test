@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-const config = {
+export default {
   secret: process.env.JWT_SECRET,
   server: {
     port: process.env.SERVER_PORT,
@@ -16,5 +16,3 @@ const config = {
     logging: process.env.DB_LOGGING === 'true' && console.log,
   },
 };
-
-export default config;

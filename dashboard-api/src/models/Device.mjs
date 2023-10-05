@@ -20,7 +20,7 @@ const Device = sequelize.define('Device', {
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING(200),
+    type: DataTypes.STRING(500),
     allowNull: false,
   },
 });

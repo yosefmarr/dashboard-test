@@ -16,13 +16,15 @@ const SequelizeInstance = new Sequelize(database, username, password, {
   port,
   dialect,
   logging,
+  define: {
+    freezeTableName: true,
+  },
 });
 
 export const DBconnect = () => {
   return new Promise(async (resolve, reject) => {
     try {
       await SequelizeInstance.authenticate();
-      await SequelizeInstance.sync({ force: true });
       resolve();
     } catch (error) {
       reject(error);
