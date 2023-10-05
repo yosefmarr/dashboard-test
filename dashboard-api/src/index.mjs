@@ -4,12 +4,13 @@ import cors from 'cors';
 import Config from './config/config.mjs';
 import { DBconnect } from './database/database.mjs';
 
-import health from './middlewares/health.mjs';
-import error from './middlewares/error.mjs';
+import Health from './middlewares/health.mjs';
+import Error from './middlewares/error.mjs';
 
 import './models/_index.mjs';
 
-import login from './routes/login.mjs';
+import Login from './routes/login.mjs';
+import User from './routes/user.mjs';
 
 const { port } = Config.server;
 
@@ -17,11 +18,12 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(health);
+app.use(Health);
 
-app.use(login);
+app.use(Login);
+app.use('/user', User);
 
-app.use(error);
+app.use(Error);
 
 try {
   await DBconnect();

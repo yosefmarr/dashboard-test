@@ -12,11 +12,11 @@ export const login = async (req, res) => {
 
     const user = await User.findOne({
       where: { email: email },
-      attributes: ['firstName', 'lastName', 'password', 'status'],
+      attributes: ['id', 'password', 'status'],
       include: [
         {
           model: Config,
-          attributes: ['language', 'sessionTimeOut'],
+          attributes: ['sessionTimeOut'],
         },
       ],
     });
@@ -35,7 +35,12 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    const options = {};
+    if (Number.isInteger(user.config.sessionTimeOut)) {
+      options.expiresIn = `${user.config.sessionTimeOut}h`;
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, options);
 
     res.status(200).json({
       status: 'success',

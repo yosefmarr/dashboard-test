@@ -7,7 +7,6 @@ import UserDevices from './UserDevices.mjs';
 import Config from './Config.mjs';
 import Dashboard from './Dashboard.mjs';
 
-User.belongsToMany(Device, { through: UserDevices });
 User.belongsTo(Role, {
   foreignKey: {
     allowNull: false,
@@ -23,13 +22,17 @@ User.belongsTo(Dashboard, {
     allowNull: false,
   },
 });
-Permission.belongsToMany(Role, { through: 'rolepermissions' });
-Device.belongsToMany(User, { through: UserDevices });
 UserDevices.belongsTo(DeviceType, {
   foreignKey: {
     allowNull: false,
   },
 });
+
+User.belongsToMany(Device, { through: UserDevices });
+Device.belongsToMany(User, { through: UserDevices });
+
+Permission.belongsToMany(Role, { through: 'rolepermissions' });
+Role.belongsToMany(Permission, { through: 'rolepermissions' });
 
 export default {
   User,
