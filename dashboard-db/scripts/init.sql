@@ -159,6 +159,21 @@ VALUES ('Admin', 'Administrator role with full privileges', NOW(), NOW());
 INSERT INTO `role` (`name`, `description`, `createdAt`, `updatedAt`)
 VALUES ('User', 'Standard user with limited privileges', NOW(), NOW());
 
+INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
+VALUES('Dashboard', 'Dashboard view', NOW(), NOW());
+
+INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
+VALUES('User config', 'User configuration', NOW(), NOW());
+
+INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
+VALUES('Dashboard config', 'Dashboard configuration', NOW(), NOW());
+
+INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
+VALUES('Devices config', 'Devices configuration', NOW(), NOW());
+
+INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
+VALUES('Administration config', 'Administration configuration', NOW(), NOW());
+
 INSERT INTO `config` (`language`, `createdAt`, `updatedAt`)
 VALUES ('en', NOW(), NOW());
 
@@ -167,3 +182,22 @@ VALUES ('Main Dashboard', 'This is the main dashboard for monitoring system metr
 
 INSERT INTO `user` (`firstName`, `lastName`, `email`, `password`, `createdAt`, `updatedAt`, `RoleId`, `ConfigId`, `DashboardId`)
 VALUES ('Yosef', 'Maldonado', 'yosefmarr@gmail.com', '$2b$10$59ZXMCNv10DX8fEcNFLVd.VqqHuu0Chf3VVeYCOvzd3P.WH3BD7cm', NOW(), NOW(), 1, 1, 1);
+
+
+INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
+VALUES(1, 1, NOW(), NOW());
+
+INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
+VALUES(1, 2, NOW(), NOW());
+
+INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
+VALUES(1, 3, NOW(), NOW());
+
+INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
+VALUES(1, 4, NOW(), NOW());
+
+INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
+VALUES(1, 5, NOW(), NOW());
+
+INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
+VALUES(2, 1, NOW(), NOW());
