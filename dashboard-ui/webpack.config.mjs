@@ -1,27 +1,43 @@
 // webpack.config.js
 import { join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
+  entry: './src/js/app.mjs',
   mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
     static: './dist',
     compress: true,
     port: 8080,
   },
-  entry: './src/js/index.mjs',
   output: {
-    filename: 'bundle.js',
+    filename: 'app.js',
     path: resolve(__dirname, 'dist'),
+    clean: true,
   },
-  devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(scss)$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: () => [require('autoprefixer')],
+              },
+            },
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.js$/,
@@ -41,4 +57,10 @@ export default {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Dashboard',
+      template: 'src/index.html',
+    }),
+  ],
 };
