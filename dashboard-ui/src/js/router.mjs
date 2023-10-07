@@ -1,7 +1,14 @@
-const isAuthenticated = () => {
-  return document.cookie
-    .split(';')
-    .some((item) => item.trim().startsWith('token='));
+import { getJWTToken } from '../utilities/jwtDB.mjs';
+
+const isAuthenticated = async () => {
+  try {
+    const token = await getJWTToken();
+    const result = !!token;
+    return result;
+  } catch (error) {
+    console.error('Error checking authentication:', error);
+    return false;
+  }
 };
 
 const router = {
@@ -55,7 +62,7 @@ const router = {
       })
       .catch((err) => console.error(err));
   },
-  checkRouteChange() {
+  async checkRouteChange() {
     const route = this.routes.find((r) => window.location.pathname === r.path);
     if (!route) {
       return this.handleRouteChange({
@@ -64,26 +71,33 @@ const router = {
       });
     }
 
-    if (
-      (route.protected && isAuthenticated()) ||
-      (!route.protected && !isAuthenticated())
-    ) {
+    const auth = await isAuthenticated();
+
+    if ((route.protected && auth) || (!route.protected && !auth)) {
       return this.handleRouteChange(route);
     }
 
-    if (route.protected && !isAuthenticated()) {
+    if (route.protected && !auth) {
       return this.handleRouteChange({
         path: '/login',
         controller: 'loginController',
       });
     }
 
-    if (!route.protected && isAuthenticated()) {
+    if (!route.protected && auth) {
       return this.handleRouteChange({
         path: '/',
         controller: 'dashboardController',
       });
     }
+  },
+  navigateTo(path) {
+    const route = this.routes.find((r) => r.path === path);
+    if (!route) {
+      path = '/not-found';
+    }
+    window.history.replaceState({}, '', path);
+    this.checkRouteChange();
   },
   init() {
     window.addEventListener('popstate', this.checkRouteChange.bind(this));

@@ -2,6 +2,7 @@
 import { join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
@@ -22,7 +23,7 @@ export default {
   module: {
     rules: [
       {
-        test: /\.(scss)$/,
+        test: /\.scss$/,
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
@@ -55,6 +56,10 @@ export default {
           },
         },
       },
+      {
+        test: /\.handlebars$/,
+        loader: 'handlebars-loader',
+      },
     ],
   },
   plugins: [
@@ -62,5 +67,6 @@ export default {
       title: 'Dashboard',
       template: 'src/index.html',
     }),
+    new Dotenv(),
   ],
 };
