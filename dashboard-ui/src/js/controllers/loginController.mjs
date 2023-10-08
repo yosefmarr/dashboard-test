@@ -32,6 +32,11 @@ const loginController = {
     const form = document.getElementById('login-form');
     form.addEventListener('submit', this.handleSubmit.bind(this));
     form.addEventListener('blur', this.handleBur.bind(this), true);
+    form.addEventListener(
+      'focus',
+      this.removeFormErrorMessage.bind(this),
+      true
+    );
   },
   handleBur(event) {
     const { target } = event;
@@ -43,16 +48,19 @@ const loginController = {
   },
   validateInput(inputElement, validationFunction) {
     inputElement.classList.remove('is-valid', 'is-invalid');
+    inputElement.parentNode.classList.remove('is-valid', 'is-invalid');
     const validationClass = validationFunction(inputElement.value)
       ? 'is-valid'
       : 'is-invalid';
+    inputElement.parentNode.classList.add(validationClass);
     inputElement.classList.add(validationClass);
   },
-  showFormErrorMessage(error) {
+  showFormErrorMessage(error, type) {
     const form = document.getElementById('login-form');
     const errorDiv = document.createElement('div');
     errorDiv.setAttribute('id', 'error-form-message');
-    errorDiv.classList.add('alert', 'alert-danger');
+    errorDiv.setAttribute('data-i18n', type);
+    errorDiv.classList.add('callout', 'callout-danger', 'mt-3');
     errorDiv.innerText = error;
     form.parentNode.insertBefore(errorDiv, form.nextSibling);
   },
@@ -64,6 +72,8 @@ const loginController = {
   },
   async handleSubmit(event) {
     event.preventDefault();
+    const submitButton = document.getElementById('btn-submit');
+    submitButton.setAttribute('disabled', 'disabled');
     this.removeFormErrorMessage();
 
     const emailInput = document.getElementById('email');
@@ -94,13 +104,19 @@ const loginController = {
         await setJWTToken(response.data.token);
         return router.navigateTo('/');
       }
-      this.showFormErrorMessage(response.data.error);
+      this.showFormErrorMessage(i18n.t('login', 'formError', 'formError'));
+      submitButton.removeAttribute('disabled');
     } catch (error) {
       if (error.response && error.response.data) {
-        this.showFormErrorMessage(i18n.t('login', 'inputsError'));
+        this.showFormErrorMessage(
+          i18n.t('login', 'inputsError'),
+          'inputsError'
+        );
+        submitButton.removeAttribute('disabled');
         return;
       }
-      this.showFormErrorMessage(i18n.t('login', 'formError'));
+      this.showFormErrorMessage(i18n.t('login', 'formError', 'formError'));
+      submitButton.removeAttribute('disabled');
     }
   },
 };

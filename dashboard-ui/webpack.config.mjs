@@ -1,5 +1,5 @@
 // webpack.config.js
-import { join, dirname, resolve } from 'path';
+import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
@@ -59,6 +59,9 @@ export default {
       {
         test: /\.handlebars$/,
         loader: 'handlebars-loader',
+        options: {
+          helperDirs: [resolve(__dirname, './src/js/templates/helpers')],
+        },
       },
     ],
   },

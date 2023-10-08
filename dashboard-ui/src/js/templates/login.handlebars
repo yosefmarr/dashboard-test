@@ -1,53 +1,72 @@
-<div class='app-body d-flex align-items-center py-4 bg-body-tertiary'>
-  <main class='form-signin w-100 m-auto'>
-    <div id='language-switcher' class='dropdown'>
-      <button
-        class='btn btn-secondary dropdown-toggle'
-        type='button'
-        data-bs-toggle='dropdown'
-        aria-expanded='false'
-      >
-        \{{lang}}
-      </button>
-      <ul class='dropdown-menu'>
-        <li><a class='dropdown-item' href='#' data-lang='en'>English (en)</a></li>
-        <li><a class='dropdown-item' href='#' data-lang='es'>Español (es)</a></li>
-      </ul>
-    </div>
-    <form id='login-form' class='needs-validation' novalidate>
-      <div class='form-floating'>
-        <input
-          type='email'
-          class='form-control'
-          id='email'
-          name='email'
-          placeholder='name@example.com'
-          required
-        />
-        <div class='invalid-feedback' data-i18n='login.emailError'>
-          \{{emailError}}
+<main class='login-main-view bg-body-tertiary'>
+
+  <div id='language-switcher' class='dropdown position-absolute top-1 end-1'>
+    <button
+      class='btn dropdown-toggle btn-outline-dark'
+      type='button'
+      data-bs-toggle='dropdown'
+      aria-expanded='false'
+    >
+      \{{lang}}
+    </button>
+    <ul class='dropdown-menu dropdown-menu-dark'>
+      <li><a
+          class='dropdown-item \{{#ifEquals lang "es"}}active\{{/ifEquals}}'
+          href='#'
+          data-lang='es'
+        >Español (es)</a></li>
+      <li><a
+          class='dropdown-item \{{#ifEquals lang "en"}}active\{{/ifEquals}}'
+          href='#'
+          data-lang='en'
+        >English (en)</a></li>
+    </ul>
+  </div>
+
+  <div class='card p-md-5 p-3' id='login-card'>
+    <form id='login-form' class='login-form needs-validation' novalidate>
+
+      <div class='input-group has-validation mb-3'>
+        <div class='form-floating'>
+          <input
+            type='email'
+            class='form-control'
+            id='email'
+            name='email'
+            placeholder='name@example.com'
+            required
+          />
+          <label for='email' data-i18n='login.email'>\{{email}}</label>
+          <div class='invalid-feedback' data-i18n='login.emailError'>
+            \{{emailError}}
+          </div>
         </div>
-        <label for='email' data-i18n='login.email'>\{{email}}</label>
+
       </div>
-      <div class='form-floating'>
-        <input
-          type='password'
-          class='form-control'
-          id='password'
-          name='password'
-          placeholder='Password'
-          required
-        />
-        <div class='invalid-feedback' data-i18n='login.passwordError'>
-          \{{passwordError}}
+
+      <div class='input-group has-validation mb-3'>
+        <div class='form-floating'>
+          <input
+            type='password'
+            class='form-control'
+            id='password'
+            name='password'
+            placeholder='Password'
+            required
+          />
+          <label for='password' data-i18n='login.password'>\{{password}}</label>
+          <div class='invalid-feedback' data-i18n='login.passwordError'>
+            \{{passwordError}}
+          </div>
         </div>
-        <label for='password' data-i18n='login.password'>\{{password}}</label>
+
       </div>
       <button
-        class='btn btn-primary w-100 py-2'
+        id='btn-submit'
+        class='btn btn-primary w-100'
         type='submit'
         data-i18n='login.signIn'
       >\{{signIn}}</button>
     </form>
-  </main>
-</div>
+  </div>
+</main>

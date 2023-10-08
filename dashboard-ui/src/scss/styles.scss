@@ -1,26 +1,37 @@
+@use 'sass:map';
+
+$position-values: (
+  1: 1%,
+  0: 0,
+  50: 50%,
+  100: 100%,
+);
+
 @import '~bootstrap/scss/bootstrap';
 
-.app-body {
+.login-main-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
-.form-signin {
-  max-width: 330px;
-  padding: 1rem;
+.card {
+  width: 90%;
+  @media (min-width: 768px) {
+    min-width: 450px;
+    max-width: 450px;
+  }
 }
 
-.form-signin .form-floating:focus-within {
-  z-index: 1;
+.callout-danger {
+  --bd-callout-color: var(--bs-danger-text-emphasis);
+  --bd-callout-bg: var(--bs-danger-bg-subtle);
+  --bd-callout-border: var(--bs-danger-border-subtle);
 }
 
-.form-signin input[type='email'] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type='password'] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.callout {
+  padding: 1.25rem;
+  color: var(--bd-callout-color, inherit);
+  background-color: var(--bd-callout-bg, var(--bs-gray-100));
 }

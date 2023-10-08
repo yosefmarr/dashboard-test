@@ -10,13 +10,20 @@ export default class LanguageSwitcher {
     languageOptions.forEach((language) =>
       language.addEventListener('click', (e) => {
         e.preventDefault();
+        this.resetActiveOptions();
         const language = e.target.getAttribute('data-lang');
+        e.target.classList.add('active');
         const languageSwitcher = document.getElementById('language-switcher');
         languageSwitcher.querySelector('button').innerText = language;
         this.i18n.setLanguage(language);
         this.updatePageLanguage();
       })
     );
+  }
+  resetActiveOptions() {
+    const languageSwitcher = document.getElementById('language-switcher');
+    const languageOptions = languageSwitcher.querySelectorAll('.dropdown-item');
+    languageOptions.forEach((language) => language.classList.remove('active'));
   }
   updatePageLanguage() {
     document.title = this.i18n.t('login', 'title');
