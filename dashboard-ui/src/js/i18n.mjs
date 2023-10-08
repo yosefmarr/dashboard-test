@@ -11,6 +11,7 @@ const i18n = {
         password: 'Password',
         passwordError: 'Please provide a password',
         signIn: 'Sign in',
+        inputsError: 'Invalid email or password',
         formError:
           'Unable to verify credentials. If you continue to experience problems, contact support.',
       },
@@ -26,20 +27,29 @@ const i18n = {
         password: 'Contraseña',
         passwordError: 'Por favor, proporciona una contraseña',
         signIn: 'Acceder',
+        inputsError: 'Correo electrónico o contraseña inválidos',
         formError:
           'No se pueden verificar las credenciales. Si continúa experimentando problemas, contacte al soporte.',
       },
     },
   },
-  currentLanguage: 'es',
   setLanguage(lang) {
-    this.currentLanguage = lang;
+    localStorage.setItem('selectedLanguage', lang);
   },
   t(path, key) {
-    return this.translations[this.currentLanguage][path][key] || key;
+    return (
+      this.translations[localStorage.getItem('selectedLanguage') || 'es'][path][
+        key
+      ] || key
+    );
   },
   tO(path) {
-    return this.translations[this.currentLanguage][path] || {};
+    const translationObject =
+      this.translations[localStorage.getItem('selectedLanguage') || 'es'][
+        path
+      ] || {};
+    translationObject.lang = localStorage.getItem('selectedLanguage') || 'es';
+    return translationObject;
   },
 };
 

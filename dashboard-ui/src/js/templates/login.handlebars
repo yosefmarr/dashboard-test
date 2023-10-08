@@ -1,5 +1,19 @@
 <div class='app-body d-flex align-items-center py-4 bg-body-tertiary'>
   <main class='form-signin w-100 m-auto'>
+    <div id='language-switcher' class='dropdown'>
+      <button
+        class='btn btn-secondary dropdown-toggle'
+        type='button'
+        data-bs-toggle='dropdown'
+        aria-expanded='false'
+      >
+        \{{lang}}
+      </button>
+      <ul class='dropdown-menu'>
+        <li><a class='dropdown-item' href='#' data-lang='en'>English (en)</a></li>
+        <li><a class='dropdown-item' href='#' data-lang='es'>Español (es)</a></li>
+      </ul>
+    </div>
     <form id='login-form' class='needs-validation' novalidate>
       <div class='form-floating'>
         <input
@@ -10,10 +24,10 @@
           placeholder='name@example.com'
           required
         />
-        <div class='invalid-feedback'>
+        <div class='invalid-feedback' data-i18n='login.emailError'>
           \{{emailError}}
         </div>
-        <label for='email'>\{{email}}</label>
+        <label for='email' data-i18n='login.email'>\{{email}}</label>
       </div>
       <div class='form-floating'>
         <input
@@ -24,14 +38,15 @@
           placeholder='Password'
           required
         />
-        <div class='invalid-feedback'>
+        <div class='invalid-feedback' data-i18n='login.passwordError'>
           \{{passwordError}}
         </div>
-        <label for='password'>\{{password}}</label>
+        <label for='password' data-i18n='login.password'>\{{password}}</label>
       </div>
       <button
         class='btn btn-primary w-100 py-2'
         type='submit'
+        data-i18n='login.signIn'
       >\{{signIn}}</button>
     </form>
   </main>
