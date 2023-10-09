@@ -41,6 +41,10 @@ export default {
         ],
       },
       {
+        test: /\.css$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -48,7 +52,7 @@ export default {
         },
       },
       {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: {
           loader: 'url-loader',
           options: {
@@ -67,6 +71,7 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: 'src/assets/favicon.ico',
       title: 'Dashboard',
       template: 'src/index.html',
     }),

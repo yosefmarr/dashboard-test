@@ -29,13 +29,13 @@ const router = {
       protected: true,
     },
     {
-      path: '/admin',
-      controller: 'adminController',
+      path: '/user-config',
+      controller: 'userConfigController',
       protected: true,
     },
     {
-      path: '/user-config',
-      controller: 'userConfigController',
+      path: '/admin',
+      controller: 'adminController',
       protected: true,
     },
     {
@@ -101,7 +101,6 @@ const router = {
   },
   init() {
     window.addEventListener('popstate', this.checkRouteChange.bind(this));
-    window.addEventListener('load', this.checkRouteChange.bind(this));
     this.checkRouteChange();
   },
 };

@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../database/database.mjs';
 
 const Permission = sequelize.define('permission', {
-  name: {
+  path: {
     type: DataTypes.STRING(25),
     allowNull: false,
     unique: {

@@ -35,3 +35,7 @@ $position-values: (
   color: var(--bd-callout-color, inherit);
   background-color: var(--bd-callout-bg, var(--bs-gray-100));
 }
+
+.dashboard-main-view {
+  height: 100vh;
+}

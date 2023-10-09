@@ -67,12 +67,12 @@ CREATE TABLE `devicetype` (
 
 CREATE TABLE `permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(25) NOT NULL,
+  `path` varchar(25) NOT NULL,
   `description` varchar(500) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `Permission_name_unique` (`name`)
+  UNIQUE KEY `Permission_path_unique` (`path`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -159,20 +159,20 @@ VALUES ('Admin', 'Administrator role with full privileges', NOW(), NOW());
 INSERT INTO `role` (`name`, `description`, `createdAt`, `updatedAt`)
 VALUES ('User', 'Standard user with limited privileges', NOW(), NOW());
 
-INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
-VALUES('Dashboard', 'Dashboard view', NOW(), NOW());
+INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
+VALUES('/', 'Dashboard view', NOW(), NOW());
 
-INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
-VALUES('User config', 'User configuration', NOW(), NOW());
+INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
+VALUES('/dashboard-config', 'Dashboard configuration', NOW(), NOW());
 
-INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
-VALUES('Dashboard config', 'Dashboard configuration', NOW(), NOW());
+INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
+VALUES('/devices-config', 'Devices configuration', NOW(), NOW());
 
-INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
-VALUES('Devices config', 'Devices configuration', NOW(), NOW());
+INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
+VALUES('/user-config', 'User configuration', NOW(), NOW());
 
-INSERT INTO `permission` (`name`, `description`, `createdAt`, `updatedAt`)
-VALUES('Administration config', 'Administration configuration', NOW(), NOW());
+INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
+VALUES('/admin', 'Administration configuration', NOW(), NOW());
 
 INSERT INTO `config` (`language`, `createdAt`, `updatedAt`)
 VALUES ('en', NOW(), NOW());
