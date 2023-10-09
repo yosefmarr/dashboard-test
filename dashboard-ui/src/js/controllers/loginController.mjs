@@ -1,14 +1,22 @@
 import axios from 'axios';
 import compileTemplate from '../../utilities/templateCompiler.mjs';
-import loginTemplate from '../templates/login.handlebars';
+import loginTemplate from '../templates/login.hbs';
 import i18n from '../i18n.mjs';
 import router from '../router.mjs';
+import LanguageSwitcher from '../../utilities/languageSwitcher.mjs';
 import { setJWTToken } from '../../utilities/jwtDB.mjs';
 import {
   validateEmail,
-  validatePassowrd,
+  validatePassword,
 } from '../../utilities/formValidation.mjs';
-import LanguageSwitcher from '../../utilities/languageSwitcher.mjs';
+
+const toggleValidationClasses = (element, isValid) => {
+  const validationClass = isValid ? 'is-valid' : 'is-invalid';
+  element.classList.remove('is-valid', 'is-invalid');
+  element.parentNode.classList.remove('is-valid', 'is-invalid');
+  element.classList.add(validationClass);
+  element.parentNode.classList.add(validationClass);
+};
 
 const loginController = {
   init() {
@@ -31,29 +39,29 @@ const loginController = {
   bindEvents() {
     const form = document.getElementById('login-form');
     form.addEventListener('submit', this.handleSubmit.bind(this));
-    form.addEventListener('blur', this.handleBur.bind(this), true);
+    form.addEventListener('blur', this.handleBlur.bind(this), true);
     form.addEventListener(
       'focus',
       this.removeFormErrorMessage.bind(this),
       true
     );
   },
-  handleBur(event) {
+  handleBlur(event) {
     const { target } = event;
+    let validationFunction;
     if (target.id === 'email') {
-      this.validateInput(target, validateEmail);
+      validationFunction = validateEmail;
     } else if (target.id === 'password') {
-      this.validateInput(target, validatePassowrd);
+      validationFunction = validatePassword;
+    } else {
+      return;
     }
+    const isValid = validationFunction(target.value);
+    toggleValidationClasses(target, isValid);
   },
   validateInput(inputElement, validationFunction) {
-    inputElement.classList.remove('is-valid', 'is-invalid');
-    inputElement.parentNode.classList.remove('is-valid', 'is-invalid');
-    const validationClass = validationFunction(inputElement.value)
-      ? 'is-valid'
-      : 'is-invalid';
-    inputElement.parentNode.classList.add(validationClass);
-    inputElement.classList.add(validationClass);
+    const isValid = validationFunction(inputElement.value);
+    toggleValidationClasses(inputElement, isValid);
   },
   showFormErrorMessage(error, type) {
     const form = document.getElementById('login-form');
@@ -80,7 +88,7 @@ const loginController = {
     const passwordInput = document.getElementById('password');
 
     this.validateInput(emailInput, validateEmail);
-    this.validateInput(passwordInput, validatePassowrd);
+    this.validateInput(passwordInput, validatePassword);
 
     if (
       emailInput.classList.contains('is-invalid') ||
@@ -107,17 +115,17 @@ const loginController = {
       this.showFormErrorMessage(i18n.t('login', 'formError', 'formError'));
       submitButton.removeAttribute('disabled');
     } catch (error) {
-      if (error.response && error.response.data) {
-        this.showFormErrorMessage(
-          i18n.t('login', 'inputsError'),
-          'inputsError'
-        );
-        submitButton.removeAttribute('disabled');
-        return;
-      }
-      this.showFormErrorMessage(i18n.t('login', 'formError', 'formError'));
+      this.handleError(error);
       submitButton.removeAttribute('disabled');
     }
+  },
+  handleError(error) {
+    if (error.response && error.response.data) {
+      this.showFormErrorMessage(i18n.t('login', 'inputsError'), 'inputsError');
+    } else {
+      this.showFormErrorMessage(i18n.t('login', 'formError', 'formError'));
+    }
+    console.error(error);
   },
 };
 

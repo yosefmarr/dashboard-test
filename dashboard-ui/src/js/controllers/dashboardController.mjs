@@ -1,6 +1,6 @@
 import axios from 'axios';
 import compileTemplate from '../../utilities/templateCompiler.mjs';
-import dashboardTemplate from '../templates/dashboard.handlebars';
+import dashboardTemplate from '../templates/dashboard.hbs';
 import { getJWTToken } from '../../utilities/jwtDB.mjs';
 import i18n from '../i18n.mjs';
 

@@ -61,10 +61,11 @@ export default {
         },
       },
       {
-        test: /\.handlebars$/,
+        test: /\.hbs$/,
         loader: 'handlebars-loader',
         options: {
           helperDirs: [resolve(__dirname, './src/js/templates/helpers')],
+          partialDirs: [resolve(__dirname, './src/js/templates/partials')],
         },
       },
     ],
