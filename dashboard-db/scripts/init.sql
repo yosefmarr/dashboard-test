@@ -68,11 +68,14 @@ CREATE TABLE `devicetype` (
 CREATE TABLE `permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `path` varchar(25) NOT NULL,
-  `description` varchar(500) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `icon` varchar(50) NOT NULL,
+  `ref` varchar(25) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `Permission_path_unique` (`path`)
+  UNIQUE KEY `Permission_path_unique` (`path`), 
+  UNIQUE KEY `Permission_path_name_unique` (`path`, `name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -159,20 +162,17 @@ VALUES ('Admin', 'Administrator role with full privileges', NOW(), NOW());
 INSERT INTO `role` (`name`, `description`, `createdAt`, `updatedAt`)
 VALUES ('User', 'Standard user with limited privileges', NOW(), NOW());
 
-INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
-VALUES('/', 'Dashboard view', NOW(), NOW());
+INSERT INTO `permission` (`path`, `name`, `icon`, `ref`, `createdAt`, `updatedAt`)
+VALUES('/', 'Home', 'bi-speedometer', 'layout.home', NOW(), NOW());
 
-INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
-VALUES('/dashboard-config', 'Dashboard configuration', NOW(), NOW());
+INSERT INTO `permission` (`path`, `name`, `icon`, `ref`, `createdAt`, `updatedAt`)
+VALUES('/config', 'Config', 'bi-gear-wide-connected', 'layout.config', NOW(), NOW());
 
-INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
-VALUES('/devices-config', 'Devices configuration', NOW(), NOW());
+INSERT INTO `permission` (`path`, `name`, `icon`, `ref`, `createdAt`, `updatedAt`)
+VALUES('/devices', 'Devices', 'bi-motherboard', 'layout.devices', NOW(), NOW());
 
-INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
-VALUES('/user-config', 'User configuration', NOW(), NOW());
-
-INSERT INTO `permission` (`path`, `description`, `createdAt`, `updatedAt`)
-VALUES('/admin', 'Administration configuration', NOW(), NOW());
+INSERT INTO `permission` (`path`, `name`, `icon`, `ref`, `createdAt`, `updatedAt`)
+VALUES('/admin', 'Admin', 'bi-person-gear', 'layout.admin', NOW(), NOW());
 
 INSERT INTO `config` (`language`, `createdAt`, `updatedAt`)
 VALUES ('en', NOW(), NOW());
@@ -195,9 +195,6 @@ VALUES(1, 3, NOW(), NOW());
 
 INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
 VALUES(1, 4, NOW(), NOW());
-
-INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
-VALUES(1, 5, NOW(), NOW());
 
 INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
 VALUES(2, 1, NOW(), NOW());

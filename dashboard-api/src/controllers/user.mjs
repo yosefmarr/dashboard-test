@@ -19,7 +19,7 @@ const getUserData = async (req, res) => {
           include: [
             {
               model: Permission,
-              attributes: ['id', 'name', 'description'],
+              attributes: ['id', 'path', 'name', 'icon', 'ref'],
               through: { attributes: [] },
             },
           ],

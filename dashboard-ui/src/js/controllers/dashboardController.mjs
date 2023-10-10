@@ -1,22 +1,26 @@
 import axios from 'axios';
 import compileTemplate from '../../utilities/templateCompiler.mjs';
 import dashboardTemplate from '../templates/dashboard.hbs';
+import LanguageSwitcher from '../../utilities/languageSwitcher.mjs';
 import { getJWTToken } from '../../utilities/jwtDB.mjs';
 import i18n from '../i18n.mjs';
 
 const dashboardController = {
   async init() {
     try {
-      const userData = await this.getUserData();
-      console.log('userData:', userData);
+      const response = await this.getUserData();
+      const { user: userData } = response;
+      i18n.setLanguage(userData.config.language);
+      const languageSwitcher = new LanguageSwitcher(i18n);
       document.title = i18n.t('dashboard', 'title');
       const generateTemplate = compileTemplate(dashboardTemplate());
-      const html = generateTemplate();
+      const html = generateTemplate({ context: userData });
       const appElement = document.getElementById('app');
       if (!appElement) {
         throw new Error('App element not found');
       }
       appElement.innerHTML = html;
+      languageSwitcher.init();
     } catch (error) {
       console.error('Error initializing login controller:', error);
     }

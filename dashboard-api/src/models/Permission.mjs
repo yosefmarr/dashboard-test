@@ -6,11 +6,22 @@ const Permission = sequelize.define('permission', {
     type: DataTypes.STRING(25),
     allowNull: false,
     unique: {
+      msg: 'Permission path already in use',
+    },
+  },
+  name: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    unique: {
       msg: 'Permission name already in use',
     },
   },
-  description: {
-    type: DataTypes.STRING(500),
+  icon: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+  },
+  ref: {
+    type: DataTypes.STRING(25),
     allowNull: false,
   },
 });

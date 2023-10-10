@@ -1,6 +1,12 @@
 const i18n = {
   translations: {
     en: {
+      layout: {
+        home: 'Home',
+        config: 'Config',
+        devices: 'Devices',
+        admin: 'Admin',
+      },
       dashboard: {
         title: 'Dashboard',
       },
@@ -17,6 +23,12 @@ const i18n = {
       },
     },
     es: {
+      layout: {
+        home: 'Inicio',
+        config: 'Configuración',
+        devices: 'Dispositivos',
+        admin: 'Admin',
+      },
       dashboard: {
         title: 'Panel',
       },

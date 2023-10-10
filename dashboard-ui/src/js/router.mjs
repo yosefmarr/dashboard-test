@@ -19,18 +19,13 @@ const router = {
       protected: true,
     },
     {
-      path: '/dashboard-config',
-      controller: 'dashboardConfigController',
+      path: '/config',
+      controller: 'configController',
       protected: true,
     },
     {
-      path: '/devices-config',
-      controller: 'devicesConfigController',
-      protected: true,
-    },
-    {
-      path: '/user-config',
-      controller: 'userConfigController',
+      path: '/devices',
+      controller: 'devicesController',
       protected: true,
     },
     {

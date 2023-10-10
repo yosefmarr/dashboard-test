@@ -30,7 +30,12 @@ export default class LanguageSwitcher {
     document.querySelectorAll('[data-i18n]').forEach((e) => {
       const i18nKey = e.getAttribute('data-i18n');
       const [path, key] = i18nKey.split('.');
-      e.textContent = this.i18n.t(path, key);
+      const textSpan = e.querySelector('.lang-text');
+      if (textSpan) {
+        textSpan.textContent = this.i18n.t(path, key);
+      } else {
+        e.textContent = this.i18n.t(path, key);
+      }
     });
   }
 }
