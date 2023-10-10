@@ -1,6 +1,11 @@
 const i18n = {
   translations: {
     en: {
+      nav: {
+        title: 'Dashboard',
+        account: 'Account',
+        logout: 'Log out',
+      },
       layout: {
         home: 'Home',
         config: 'Config',
@@ -23,6 +28,11 @@ const i18n = {
       },
     },
     es: {
+      nav: {
+        title: 'Panel',
+        account: 'Cuenta',
+        logout: 'Cerrar sesión',
+      },
       layout: {
         home: 'Inicio',
         config: 'Configuración',

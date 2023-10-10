@@ -1,32 +1,61 @@
 export default class LanguageSwitcher {
-  constructor(i18n) {
+  constructor(i18n, path) {
     this.i18n = i18n;
+    this.path = path;
+    this.languageSwitchers = document.querySelectorAll('.language-switcher');
+    if (!this.languageSwitchers.length) {
+      console.error('No language switchers found');
+      return;
+    }
   }
+
   init() {
-    const languageSwitcher = document.getElementById('language-switcher');
     const selectedLanguage = localStorage.getItem('selectedLanguage') || 'es';
-    languageSwitcher.querySelector('button').innerText = selectedLanguage;
-    const languageOptions = languageSwitcher.querySelectorAll('.dropdown-item');
-    languageOptions.forEach((language) =>
-      language.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.resetActiveOptions();
-        const language = e.target.getAttribute('data-lang');
-        e.target.classList.add('active');
-        const languageSwitcher = document.getElementById('language-switcher');
-        languageSwitcher.querySelector('button').innerText = language;
-        this.i18n.setLanguage(language);
-        this.updatePageLanguage();
-      })
-    );
+    this.setLangToLanguageSwitcher(selectedLanguage);
+    this.languageSwitchers.forEach((languageSwitcher) => {
+      languageSwitcher.addEventListener(
+        'click',
+        this.handleLanguageOptionClick.bind(this)
+      );
+    });
   }
+
+  handleLanguageOptionClick(e) {
+    const languageOption = e.target.closest('.dropdown-item');
+    if (languageOption) {
+      e.preventDefault();
+      this.resetActiveOptions();
+      languageOption.classList.add('active');
+      const selectedLanguage = languageOption.getAttribute('data-lang');
+      this.setLangToLanguageSwitcher(selectedLanguage);
+      this.i18n.setLanguage(selectedLanguage);
+      this.updatePageLanguage();
+    }
+  }
+
+  setLangToLanguageSwitcher(language) {
+    this.languageSwitchers.forEach((languageSwitcher) => {
+      const button = languageSwitcher.querySelector('button');
+      if (button) {
+        button.innerText = language;
+      } else {
+        console.error('Button not found in language switcher');
+      }
+    });
+  }
+
   resetActiveOptions() {
-    const languageSwitcher = document.getElementById('language-switcher');
-    const languageOptions = languageSwitcher.querySelectorAll('.dropdown-item');
-    languageOptions.forEach((language) => language.classList.remove('active'));
+    this.languageSwitchers.forEach((languageSwitcher) => {
+      const languageOptions =
+        languageSwitcher.querySelectorAll('.dropdown-item');
+      languageOptions.forEach((language) =>
+        language.classList.remove('active')
+      );
+    });
   }
+
   updatePageLanguage() {
-    document.title = this.i18n.t('login', 'title');
+    document.title = this.i18n.t(this.path, 'title');
     document.querySelectorAll('[data-i18n]').forEach((e) => {
       const i18nKey = e.getAttribute('data-i18n');
       const [path, key] = i18nKey.split('.');

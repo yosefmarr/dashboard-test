@@ -11,7 +11,6 @@ const dashboardController = {
       const response = await this.getUserData();
       const { user: userData } = response;
       i18n.setLanguage(userData.config.language);
-      const languageSwitcher = new LanguageSwitcher(i18n);
       document.title = i18n.t('dashboard', 'title');
       const generateTemplate = compileTemplate(dashboardTemplate());
       const html = generateTemplate({ context: userData });
@@ -20,6 +19,7 @@ const dashboardController = {
         throw new Error('App element not found');
       }
       appElement.innerHTML = html;
+      const languageSwitcher = new LanguageSwitcher(i18n, 'dashboard');
       languageSwitcher.init();
     } catch (error) {
       console.error('Error initializing login controller:', error);

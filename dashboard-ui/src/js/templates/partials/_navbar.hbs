@@ -1,46 +1,27 @@
 <nav class='navbar navbar-expand-md bg-dark-subtle flex-grow-1'>
   <div class='container-fluid'>
-    <a class='navbar-brand' href='#'>Dashboard</a>
+    <a class='navbar-brand' href='#' data-i18n='nav.title'>Dashboard</a>
     <button
       class='navbar-toggler'
       type='button'
       data-bs-toggle='collapse'
-      data-bs-target='#navbarSupportedContent'
-      aria-controls='navbarSupportedContent'
+      data-bs-target='#navbarContent'
+      aria-controls='navbarContent'
       aria-expanded='false'
-      aria-label='Toggle navigation'
     >
       <span class='navbar-toggler-icon'></span>
     </button>
-    <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+    <div class='collapse navbar-collapse' id='navbarContent'>
       <ul class='navbar-nav me-auto mb-2 mb-lg-0 d-lg-none d-md-none'>
-        <li class='nav-item'>
-          <a href='#' class='nav-link'><i
-              class='bi bi-speedometer pe-none me-2'
-            ></i>Home</a>
-        </li>
-        <li class='nav-item'>
-          <a href='#' class='nav-link'><i
-              class='bi bi-gear-wide-connected pe-none me-2'
-            ></i>Config</a>
-        </li>
-        <li class='nav-item'>
-          <a href='#' class='nav-link'><i
-              class='bi bi-motherboard pe-none me-2'
-            ></i>Devices</a>
-        </li>
-        <li class='nav-item'>
-          <a href='#' class='nav-link'><i
-              class='bi bi-person-gear pe-none me-2'
-            ></i>Admin</a>
-        </li>
+        {{#each role.permissions}}
+          <li class='nav-item'>
+            <a href='{{path}}' class='nav-link' data-i18n='{{ref}}'>
+              <i class='bi {{icon}} pe-none me-2'></i>
+              <span class='lang-text'>{{name}}</span>
+            </a>
+          </li>
+        {{/each}}
         <li><hr /></li>
-        <li class='nav-item'>
-          <a href='#' class='nav-link'><i
-              class='bi bi-person-circle pe-none me-2'
-            ></i>{{firstName}}
-            {{lastName}}</a>
-        </li>
         <li class='nav-item'>
           <a
             class='nav-link dropdown-toggle'
@@ -49,16 +30,32 @@
             data-bs-toggle='dropdown'
             aria-expanded='false'
           >
-            {{config.language}}
+            <i class='bi bi-person-circle'></i>
+            {{firstName}}
+            {{lastName}}
           </a>
           <ul class='dropdown-menu'>
-            <li><a class='dropdown-item' href='#'>Español (es)</a></li>
-            <li><a class='dropdown-item' href='#'>English (en)</a></li>
+            <li><a class='dropdown-item account-modal' href='#' data-i18n='nav.account'>Account</a></li>
+            <li><a class='dropdown-item logout-modal' href='#' data-i18n='nav.logout'>Log out</a></li>
+          </ul>
+        </li>
+        <li class='language-switcher nav-item'>
+          <button
+            class='nav-link dropdown-toggle'
+            href='#'
+            role='button'
+            data-bs-toggle='dropdown'
+            aria-expanded='false'
+          >
+            {{config.language}}
+          </button>
+          <ul class='dropdown-menu'>
+            <li><a class='dropdown-item {{#ifEquals config.language "es"}}active{{/ifEquals}}' href='#'  data-lang='es'>Español (es)</a></li>
+            <li><a class='dropdown-item {{#ifEquals config.language "en"}}active{{/ifEquals}}' href='#'  data-lang='en'>English (en)</a></li>
           </ul>
         </li>
       </ul>
     </div>
-
     <div class='btn-group dropstart d-none d-md-block'>
       <button
         class='btn btn-secondary dropdown-toggle'
@@ -71,9 +68,8 @@
         {{lastName}}
       </button>
       <ul class='dropdown-menu'>
-        <li><a class='dropdown-item' href='#'>Action</a></li>
-        <li><a class='dropdown-item' href='#'>Another action</a></li>
-        <li><a class='dropdown-item' href='#'>Something else here</a></li>
+        <li><a class='dropdown-item account-modal' href='#' data-i18n='nav.account'>Account</a></li>
+        <li><a class='dropdown-item logout-modal' href='#' data-i18n='nav.logout'>Log out</a></li>
       </ul>
     </div>
   </div>

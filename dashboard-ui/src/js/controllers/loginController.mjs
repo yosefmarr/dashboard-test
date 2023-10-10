@@ -21,7 +21,6 @@ const toggleValidationClasses = (element, isValid) => {
 const loginController = {
   init() {
     try {
-      const languageSwitcher = new LanguageSwitcher(i18n);
       document.title = i18n.t('login', 'title');
       const generateTemplate = compileTemplate(loginTemplate());
       const html = generateTemplate(i18n.tO('login'));
@@ -31,6 +30,7 @@ const loginController = {
       }
       appElement.innerHTML = html;
       this.bindEvents();
+      const languageSwitcher = new LanguageSwitcher(i18n, 'login');
       languageSwitcher.init();
     } catch (error) {
       console.error('Error initializing login controller:', error);
