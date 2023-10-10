@@ -1,6 +1,7 @@
 <nav class='navbar navbar-expand-md bg-dark-subtle flex-grow-1'>
   <div class='container-fluid'>
-    <a class='navbar-brand' href='#' data-i18n='nav.title'>Dashboard</a>
+    <a class='navbar-brand' href='#'>
+      <span class="fs-4" data-i18n='nav.title'>Dashboard</span></a>
     <button
       class='navbar-toggler'
       type='button'
@@ -15,7 +16,7 @@
       <ul class='navbar-nav me-auto mb-2 mb-lg-0 d-lg-none d-md-none'>
         {{#each role.permissions}}
           <li class='nav-item'>
-            <a href='{{path}}' class='nav-link' data-i18n='{{ref}}'>
+            <a href='{{path}}' class='nav-link nav-path' data-i18n='{{ref}}'>
               <i class='bi {{icon}} pe-none me-2'></i>
               <span class='lang-text'>{{name}}</span>
             </a>

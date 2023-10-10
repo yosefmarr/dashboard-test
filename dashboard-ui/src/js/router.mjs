@@ -94,6 +94,17 @@ const router = {
     window.history.replaceState({}, '', path);
     this.checkRouteChange();
   },
+  bindNavigationEvents() {
+    const navigationElements = document.querySelectorAll('.nav-path');
+    navigationElements.forEach((navigationElement) => {
+      navigationElement.addEventListener('click', (event) => {
+        event.preventDefault();
+        const target = event.target.closest('a');
+        const path = new URL(target.href).pathname;
+        this.navigateTo(path);
+      });
+    });
+  },
   init() {
     window.addEventListener('popstate', this.checkRouteChange.bind(this));
     this.checkRouteChange();

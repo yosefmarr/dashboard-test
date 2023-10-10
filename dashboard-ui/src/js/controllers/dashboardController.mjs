@@ -4,6 +4,7 @@ import dashboardTemplate from '../templates/dashboard.hbs';
 import LanguageSwitcher from '../../utilities/languageSwitcher.mjs';
 import { getJWTToken } from '../../utilities/jwtDB.mjs';
 import i18n from '../i18n.mjs';
+import router from '../router.mjs';
 
 const dashboardController = {
   async init() {
@@ -21,6 +22,7 @@ const dashboardController = {
       appElement.innerHTML = html;
       const languageSwitcher = new LanguageSwitcher(i18n, 'dashboard');
       languageSwitcher.init();
+      router.bindNavigationEvents();
     } catch (error) {
       console.error('Error initializing login controller:', error);
     }
