@@ -1,7 +1,13 @@
 <nav class='navbar navbar-expand-md bg-dark-subtle flex-grow-1'>
   <div class='container-fluid'>
     <a class='navbar-brand' href='#'>
-      <span class="fs-4" data-i18n='nav.title'>Dashboard</span></a>
+      <span class="fs-4" data-i18n='nav.title'>Dashboard</span>
+      <div class="d-lg-none d-md-none" style="display: inline-block;">
+        {{#each role.permissions}} 
+          <span  class='d-none' style="{{#ifEquals ../actualPath path}}display: block !important {{/ifEquals}}"> - <span data-i18n='{{ref}}' class="lang-text">{{name}}</span></span>
+        {{/each}}
+      </div>
+    </a>
     <button
       class='navbar-toggler'
       type='button'
@@ -16,7 +22,7 @@
       <ul class='navbar-nav me-auto mb-2 mb-lg-0 d-lg-none d-md-none'>
         {{#each role.permissions}}
           <li class='nav-item'>
-            <a href='{{path}}' class='nav-link nav-path' data-i18n='{{ref}}'>
+            <a href='{{path}}' class='nav-link nav-path {{#ifEquals ../actualPath path}}active{{/ifEquals}}' data-i18n='{{ref}}'>
               <i class='bi {{icon}} pe-none me-2'></i>
               <span class='lang-text'>{{name}}</span>
             </a>
@@ -36,8 +42,8 @@
             {{lastName}}
           </a>
           <ul class='dropdown-menu'>
-            <li><a class='dropdown-item account-modal' href='#' data-i18n='nav.account'>Account</a></li>
-            <li><a class='dropdown-item logout-modal' href='#' data-i18n='nav.logout'>Log out</a></li>
+            <li><a class='dropdown-item user-modal account-modal' href='#' data-i18n='nav.account'>Account</a></li>
+            <li><a class='dropdown-item user-modal logout-modal' href='#' data-i18n='nav.logout'>Log out</a></li>
           </ul>
         </li>
         <li class='language-switcher nav-item'>
@@ -69,8 +75,8 @@
         {{lastName}}
       </button>
       <ul class='dropdown-menu'>
-        <li><a class='dropdown-item account-modal' href='#' data-i18n='nav.account'>Account</a></li>
-        <li><a class='dropdown-item logout-modal' href='#' data-i18n='nav.logout'>Log out</a></li>
+        <li><a class='dropdown-item user-modal account-modal' href='#' data-i18n='nav.account'>Account</a></li>
+        <li><a class='dropdown-item user-modal logout-modal' href='#' data-i18n='nav.logout'>Log out</a></li>
       </ul>
     </div>
   </div>

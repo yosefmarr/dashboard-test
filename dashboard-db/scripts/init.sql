@@ -166,7 +166,7 @@ INSERT INTO `permission` (`path`, `name`, `icon`, `ref`, `createdAt`, `updatedAt
 VALUES('/', 'Home', 'bi-speedometer', 'layout.home', NOW(), NOW());
 
 INSERT INTO `permission` (`path`, `name`, `icon`, `ref`, `createdAt`, `updatedAt`)
-VALUES('/config', 'Config', 'bi-gear-wide-connected', 'layout.config', NOW(), NOW());
+VALUES('/settings', 'Settings', 'bi-gear-wide-connected', 'layout.settings', NOW(), NOW());
 
 INSERT INTO `permission` (`path`, `name`, `icon`, `ref`, `createdAt`, `updatedAt`)
 VALUES('/devices', 'Devices', 'bi-motherboard', 'layout.devices', NOW(), NOW());

@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { getJWTToken } from '../utilities/jwtDB.mjs';
+
 const i18n = {
   translations: {
     en: {
@@ -8,12 +11,21 @@ const i18n = {
       },
       layout: {
         home: 'Home',
-        config: 'Config',
+        settings: 'Settings',
         devices: 'Devices',
         admin: 'Admin',
       },
       dashboard: {
         title: 'Dashboard',
+      },
+      settings: {
+        title: 'Settings',
+      },
+      devices: {
+        title: 'Devices',
+      },
+      admin: {
+        title: 'Admin',
       },
       login: {
         title: 'Login',
@@ -35,12 +47,21 @@ const i18n = {
       },
       layout: {
         home: 'Inicio',
-        config: 'Configuración',
+        settings: 'Configuración',
         devices: 'Dispositivos',
         admin: 'Admin',
       },
       dashboard: {
         title: 'Panel',
+      },
+      settings: {
+        title: 'Configuraciones',
+      },
+      devices: {
+        title: 'Dispositivos',
+      },
+      admin: {
+        title: 'Admin',
       },
       login: {
         title: 'Iniciar sesión',
@@ -55,8 +76,27 @@ const i18n = {
       },
     },
   },
-  setLanguage(lang) {
+  async setLanguage(lang) {
     localStorage.setItem('selectedLanguage', lang);
+    try {
+      const JWTToken = await getJWTToken();
+      if (JWTToken) {
+        const response = await axios.post(
+          `${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}/user/settings/language`,
+          {
+            language: lang,
+          },
+          {
+            headers: { Authorization: `Bearer ${JWTToken}` },
+          }
+        );
+        if (response.status !== 200 || response.data.status !== 'success') {
+          console.error(response.error);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
   },
   t(path, key) {
     return (

@@ -1,27 +1,27 @@
 import axios from 'axios';
 import compileTemplate from '../../utilities/templateCompiler.mjs';
-import dashboardTemplate from '../templates/dashboard.hbs';
+import settingsTemplate from '../templates/settings.hbs';
 import LanguageSwitcher from '../../utilities/languageSwitcher.mjs';
 import { getJWTToken } from '../../utilities/jwtDB.mjs';
 import i18n from '../i18n.mjs';
 import router from '../router.mjs';
 
-const dashboardController = {
+const settingsController = {
   async init() {
     try {
       const response = await this.getUserData();
       const { user: userData } = response;
       i18n.setLanguage(userData.config.language);
-      document.title = i18n.t('dashboard', 'title');
-      const generateTemplate = compileTemplate(dashboardTemplate());
-      userData.actualPath = '/';
+      document.title = i18n.t('settings', 'title');
+      const generateTemplate = compileTemplate(settingsTemplate());
+      userData.actualPath = '/settings';
       const html = generateTemplate({ context: userData });
       const appElement = document.getElementById('app');
       if (!appElement) {
         throw new Error('App element not found');
       }
       appElement.innerHTML = html;
-      const languageSwitcher = new LanguageSwitcher(i18n, 'dashboard');
+      const languageSwitcher = new LanguageSwitcher(i18n, 'settings');
       languageSwitcher.init();
       router.bindNavigationEvents();
     } catch (error) {
@@ -44,4 +44,4 @@ const dashboardController = {
   },
 };
 
-export default dashboardController;
+export default settingsController;

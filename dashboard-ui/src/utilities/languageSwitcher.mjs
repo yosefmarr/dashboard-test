@@ -18,6 +18,7 @@ export default class LanguageSwitcher {
         this.handleLanguageOptionClick.bind(this)
       );
     });
+    this.updatePageLanguage();
   }
 
   handleLanguageOptionClick(e) {

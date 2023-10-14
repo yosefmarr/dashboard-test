@@ -19,8 +19,8 @@ const router = {
       protected: true,
     },
     {
-      path: '/config',
-      controller: 'configController',
+      path: '/settings',
+      controller: 'settingsController',
       protected: true,
     },
     {
