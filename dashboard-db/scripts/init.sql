@@ -180,8 +180,9 @@ VALUES ('en', NOW(), NOW());
 INSERT INTO `dashboard` (`name`, `description`, `count`, `createdAt`, `updatedAt`)
 VALUES ('Main Dashboard', 'This is the main dashboard for monitoring system metrics.', 0, NOW(), NOW());
 
+-- password: A1b2@3c4
 INSERT INTO `user` (`firstName`, `lastName`, `email`, `password`, `createdAt`, `updatedAt`, `RoleId`, `ConfigId`, `DashboardId`)
-VALUES ('Yosef', 'Maldonado', 'yosefmarr@gmail.com', '$2b$10$59ZXMCNv10DX8fEcNFLVd.VqqHuu0Chf3VVeYCOvzd3P.WH3BD7cm', NOW(), NOW(), 1, 1, 1);
+VALUES ('Yosef', 'Maldonado', 'yosefmarr@gmail.com', '$2b$10$noa8Oupspik32OCBOGx.5uJeBPwcnAa8t8wEaxFfuC6EjCPt00M82', NOW(), NOW(), 1, 1, 1);
 
 
 INSERT INTO `rolepermissions` (`RoleId`,`PermissionId`, `createdAt`, `updatedAt`)
