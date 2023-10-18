@@ -13,7 +13,7 @@ export default {
     historyApiFallback: true,
     static: './dist',
     compress: true,
-    port: 3000,
+    port: 3001,
   },
   output: {
     filename: 'app.js',
