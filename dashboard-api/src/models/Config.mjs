@@ -1,17 +1,17 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../database/database.mjs';
+const config = (sequelize, DataTypes) => {
+  return sequelize.define('config', {
+    language: {
+      type: DataTypes.ENUM('es', 'en'),
+      defaultValue: 'es',
+      allowNull: false,
+    },
+    session_time_out: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+  });
+};
 
-const Config = sequelize.define('config', {
-  language: {
-    type: DataTypes.ENUM,
-    values: ['es', 'en'],
-    defaultValue: 'es',
-    allowNull: false,
-  },
-  sessionTimeOut: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-});
+export const associate = (models) => {};
 
-export default Config;
+export default config;

@@ -1,13 +1,15 @@
 # Dashboard API
 
-## Setup
+## Sequelize
+
+### Creating Model
 
 ```
-$ npm install
+$ npm run model:create -- --name config --attributes language:enum:'{es, en}',session_time_out:integer
 ```
 
-## Dev Run
+## Running Migration
 
 ```
-$ npm run dev
+$ npm run migrate
 ```

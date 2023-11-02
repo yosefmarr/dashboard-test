@@ -12,7 +12,7 @@ export default {
     database: process.env.DB_DATABASE,
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    service: process.env.DB_SERVICE,
+    dialect: process.env.DB_DIALECT,
     logging: process.env.DB_LOGGING === 'true' && console.log,
   },
 };

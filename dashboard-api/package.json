@@ -1,12 +1,14 @@
 {
   "name": "dashboard-api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Dashboard backend",
-  "main": "src/index.mjs",
-  "type": "module",
+  "main": "src/server.mjs",
   "scripts": {
-    "start": "node ./src/index.mjs",
-    "dev": "nodemon ./src/index.mjs"
+    "start": "node ./src/server.mjs",
+    "dev": "nodemon ./src/server.mjs",
+    "migrate:create": "npx sequelize-cli migration:create",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:rollback": "npx sequelize-cli db:migrate:undo"
   },
   "author": "yosefmarr",
   "license": "ISC",
