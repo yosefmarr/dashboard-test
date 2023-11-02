@@ -3,22 +3,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('config', {
+    await queryInterface.createTable('dashboard', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      language: {
-        type: Sequelize.ENUM('es', 'en'),
-        defaultValue: 'es',
+      name: {
+        type: Sequelize.STRING(25),
         allowNull: false,
       },
-      session_time_out: {
-        type: Sequelize.INTEGER,
-        defaultValue: 1440 /* 24 hours in minutes */,
+      description: {
+        type: Sequelize.STRING(500),
         allowNull: false,
+      },
+      count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+      },
+      starting_count: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      min_count: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      max_count: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
       created_at: {
         allowNull: false,
@@ -32,6 +47,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('config');
+    await queryInterface.dropTable('dashboard');
   },
 };
