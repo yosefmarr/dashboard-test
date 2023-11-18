@@ -5,10 +5,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('config', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       language: {
         type: Sequelize.ENUM('es', 'en'),
@@ -20,13 +20,29 @@ module.exports = {
         defaultValue: 1440 /* 24 hours in minutes */,
         allowNull: false,
       },
-      created_at: {
+      created_by: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id',
+        },
+      },
+      created_at: {
         type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_by: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id',
+        },
       },
       updated_at: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },

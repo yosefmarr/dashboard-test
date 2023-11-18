@@ -3,21 +3,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('access', {
+    await queryInterface.createTable('device_type', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
-      action: {
+      name: {
         type: Sequelize.STRING(50),
         allowNull: false,
-        unique: true,
       },
       description: {
         type: Sequelize.STRING(120),
-        allowNull: true,
+        allowNull: false,
       },
       created_by: {
         type: Sequelize.INTEGER,
@@ -47,6 +46,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('access');
+    await queryInterface.dropTable('device_type');
   },
 };

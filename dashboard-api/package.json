@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/server.mjs",
     "dev": "nodemon ./src/server.mjs",
-    "migrate:create": "npx sequelize-cli migration:create --underscored --name",
+    "migrate:create": "npx sequelize-cli migration:create --name",
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:rollback": "npx sequelize-cli db:migrate:undo"
   },

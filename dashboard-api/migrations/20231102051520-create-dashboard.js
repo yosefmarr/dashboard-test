@@ -5,17 +5,17 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('dashboard', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       name: {
-        type: Sequelize.STRING(25),
+        type: Sequelize.STRING(50),
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING(500),
+        type: Sequelize.STRING(120),
         allowNull: false,
       },
       count: {
@@ -35,13 +35,29 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
-      created_at: {
+      created_by: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id',
+        },
+      },
+      created_at: {
         type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_by: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id',
+        },
       },
       updated_at: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },
